@@ -42,7 +42,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
             router.push('/dashboard');
         } catch (error: any) {
-            throw new Error(error.response?.data?.message || 'Login failed');
+            console.error('Login error:', error);
+            const message = error.response?.data?.message || error.message || 'Login failed. Please check your credentials and try again.';
+            throw new Error(message);
         }
     };
 
